@@ -124,15 +124,20 @@ public class Homework08 {
 	}
 
 	private void searchBoard() {
+		System.out.println();
+		System.out.println("검색할 게시글 번호를 입력하세요.");
+		System.out.print("게시글 번호 >> ");
+		int boardNo = scan.nextInt();
+		
 		try {
-			System.out.println();
-			System.out.println("검색할 게시글 번호를 입력하세요.");
-			System.out.print("게시글 번호 >> ");
-			int boardNo = scan.nextInt();
 			conn = JDBCUtil2.getConnection();
 			
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(" SELECT * FROM JDBC_BOARD ");
+			String sql = " SELECT * FROM JDBC_BOARD WHERE BOARD_NO = ? ";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			
+			rs = pstmt.executeQuery();
+			
 			System.out.println();
 			
 			System.out.println("----------------------------------------------");
@@ -182,6 +187,7 @@ public class Homework08 {
 			ex.printStackTrace();
 		} finally {
 			JDBCUtil2.close(conn, stmt, pstmt, rs);
+			printbBard();
 		}
 	}
 
@@ -280,6 +286,7 @@ public class Homework08 {
 			e.printStackTrace();
 		} finally {
 			JDBCUtil2.close(conn, stmt, pstmt, rs);
+			printbBard();
 		}
 
 	}
