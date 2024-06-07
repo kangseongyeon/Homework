@@ -229,7 +229,7 @@ public class Homework08 {
 			
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setNString(1, boardTitle);
+			pstmt.setString(1, boardTitle);
 			pstmt.setString(2, boardWriter);
 			pstmt.setString(3, boardContent);
 			pstmt.setInt(4, boardNo);
